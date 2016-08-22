@@ -43,7 +43,7 @@ public class Scheda extends javax.swing.JFrame {
         pannello.removeAll();
         try {
             ResultSet rs=GestioneDatabase.querySelect("SELECT "+nomeCampo+" FROM "+tabella);
-            while(rs.next())
+            while(rs!=null && rs.next())
             {
                 pannello.add(new ElementoScheda(this, rs.getString(1)));
             }    
