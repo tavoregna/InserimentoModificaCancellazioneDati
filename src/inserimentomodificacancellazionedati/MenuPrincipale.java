@@ -8,10 +8,10 @@ public class MenuPrincipale extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    private void apriScheda(String s)
+    private void apriScheda(String tabella,String campo)
     {
         this.setVisible(false);
-        new Scheda(this);
+        new Scheda(this,tabella,campo);
     }
     
     @SuppressWarnings("unchecked")
@@ -83,15 +83,15 @@ public class MenuPrincipale extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void diagnosiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagnosiActionPerformed
-        apriScheda(null);
+        apriScheda("Diagnosi","Nome");
     }//GEN-LAST:event_diagnosiActionPerformed
 
     private void terapieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terapieActionPerformed
-        apriScheda(null);
+        apriScheda("Terapia","Nome");
     }//GEN-LAST:event_terapieActionPerformed
 
     private void mediciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediciActionPerformed
-        apriScheda(null);
+        apriScheda(null,null);
     }//GEN-LAST:event_mediciActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
