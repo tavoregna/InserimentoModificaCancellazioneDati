@@ -5,6 +5,12 @@
  */
 package inserimentomodificacancellazionedati;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Riccardo
@@ -13,12 +19,13 @@ public class ElementoScheda extends javax.swing.JPanel {
 
     private Scheda parent;
     private String valoreCampo;
+    private String vecchioValore;
     
     public ElementoScheda(Scheda p,String valore) {
         initComponents();
         parent=p;
         valoreCampo=valore;
-        
+        campoTesto.setEnabled(false);
         campoTesto.setText(valore);
         
         this.setVisible(true);
@@ -32,19 +39,23 @@ public class ElementoScheda extends javax.swing.JPanel {
         modifica = new javax.swing.JButton();
         elimina = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(132, 210, 230));
+
         campoTesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoTestoActionPerformed(evt);
             }
         });
 
-        modifica.setText("Abilita modifica");
+        modifica.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        modifica.setText("Abilita Modifica");
         modifica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modificaActionPerformed(evt);
             }
         });
 
+        elimina.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         elimina.setText("Elimina");
         elimina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,10 +91,51 @@ public class ElementoScheda extends javax.swing.JPanel {
 
     private void modificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificaActionPerformed
         // TODO add your handling code here:
+        if((modifica.getText().equals("Abilita Modifica")))
+        {
+         campoTesto.setEnabled(true);
+         modifica.setText("Termina Modifica");
+         vecchioValore=campoTesto.getText();
+         return;
+        }
+        int n= JOptionPane.showConfirmDialog(null,"Vuoi salvare le modifiche?","SALVA MODIFICHE",JOptionPane.YES_NO_OPTION);
+        if(n==JOptionPane.YES_OPTION)
+        {
+            try {
+                PreparedStatement st=GestioneDatabase.preparedStatement("UPDATE "+parent.getTabella()+" SET "+parent.getNomeCampo()+"=? WHERE "+parent.getNomeCampo()+"=?");
+                st.setString(1,campoTesto.getText());
+                st.setString(2,valoreCampo);
+                st.executeUpdate();
+                parent.aggiornaElementi();
+            } catch (SQLException ex) {
+                Logger.getLogger(ElementoScheda.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else
+        {
+            campoTesto.setText(vecchioValore);
+        }
+        campoTesto.setEnabled(false);
+        modifica.setText("Abilita Modifica");
+        
+        
     }//GEN-LAST:event_modificaActionPerformed
 
     private void eliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminaActionPerformed
         // TODO add your handling code here:
+        int n= JOptionPane.showConfirmDialog(parent,"Vuoi eliminare l'elemento?","ELIMINA ELEMENTO",JOptionPane.YES_NO_OPTION);
+        if(n==JOptionPane.YES_OPTION)
+        {
+             try {
+                PreparedStatement st=GestioneDatabase.preparedStatement("DELETE FROM "+parent.getTabella()+" WHERE "+parent.getNomeCampo()+"=?");
+                st.setString(1,valoreCampo);
+                st.executeUpdate();
+                this.setEnabled(false);
+                parent.aggiornaElementi();
+            } catch (SQLException ex) {
+                Logger.getLogger(ElementoScheda.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_eliminaActionPerformed
 
 
