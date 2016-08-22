@@ -19,7 +19,7 @@ public class ElementoScheda extends javax.swing.JPanel {
 
     private Scheda parent;
     private String valoreCampo;
-    private String vecchioValore;
+    //private String vecchioValore;
     
     public ElementoScheda(Scheda p,String valore) {
         initComponents();
@@ -95,7 +95,7 @@ public class ElementoScheda extends javax.swing.JPanel {
         {
          campoTesto.setEnabled(true);
          modifica.setText("Termina Modifica");
-         vecchioValore=campoTesto.getText();
+         //vecchioValore=campoTesto.getText();
          return;
         }
         int n= JOptionPane.showConfirmDialog(null,"Vuoi salvare le modifiche?","SALVA MODIFICHE",JOptionPane.YES_NO_OPTION);
@@ -113,7 +113,7 @@ public class ElementoScheda extends javax.swing.JPanel {
         }
         else
         {
-            campoTesto.setText(vecchioValore);
+            campoTesto.setText(valoreCampo);
         }
         campoTesto.setEnabled(false);
         modifica.setText("Abilita Modifica");
