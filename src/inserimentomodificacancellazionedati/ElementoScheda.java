@@ -97,12 +97,16 @@ public class ElementoScheda extends javax.swing.JPanel {
          //vecchioValore=campoTesto.getText();
          return;
         }
+        if(Utilita.standardizzaNomi(valoreCampo).equals(Utilita.standardizzaNomi(campoTesto.getText())))
+        {
+          return;        
+        }
         int n= JOptionPane.showConfirmDialog(null,"Vuoi salvare le modifiche?","SALVA MODIFICHE",JOptionPane.YES_NO_OPTION);
         if(n==JOptionPane.YES_OPTION)
         {
             try {
                 PreparedStatement st=GestioneDatabase.preparedStatement("UPDATE "+parent.getTabella()+" SET "+parent.getNomeCampo()+"=? WHERE "+parent.getNomeCampo()+"=?");
-                st.setString(1,campoTesto.getText());
+                st.setString(1,Utilita.standardizzaNomi(campoTesto.getText()));
                 st.setString(2,valoreCampo);
                 st.executeUpdate();
                 parent.aggiornaElementi();
