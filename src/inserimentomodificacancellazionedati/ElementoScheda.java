@@ -27,7 +27,6 @@ public class ElementoScheda extends javax.swing.JPanel {
         valoreCampo=valore;
         campoTesto.setEnabled(false);
         campoTesto.setText(valore);
-        
         this.setVisible(true);
     }
 
