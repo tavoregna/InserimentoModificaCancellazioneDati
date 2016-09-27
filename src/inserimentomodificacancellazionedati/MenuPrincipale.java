@@ -106,7 +106,7 @@ public class MenuPrincipale extends javax.swing.JFrame {
     }//GEN-LAST:event_terapieActionPerformed
 
     private void mediciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediciActionPerformed
-        apriScheda("Medico","Nome");
+        apriScheda("Medico","Cognome");
     }//GEN-LAST:event_mediciActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,5 +1,6 @@
 package inserimentomodificacancellazionedati;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -99,6 +100,11 @@ public class Scheda extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jButton1.setText("AGGIUNGI DIAGNOSI");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,6 +154,18 @@ public class Scheda extends javax.swing.JFrame {
         if(parent!=null)
             parent.setVisible(true);
     }//GEN-LAST:event_formWindowClosed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       if(jTextField12.getText().length()==0)
+           return;
+        try {
+            PreparedStatement pst=GestioneDatabase.preparedStatement("INSERT INTO "+tabella+"("+nomeCampo+") VALUES(?)");
+            pst.setString(1,Utilita.standardizzaNomi(jTextField12.getText()));
+        } catch (SQLException ex) {
+            Logger.getLogger(Scheda.class.getName()).log(Level.SEVERE, null, ex);
+            Utilita.mostraMessaggio(tabella+" già presente");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
