@@ -114,6 +114,7 @@ public class ElementoScheda extends javax.swing.JPanel {
                     st.setString(1,Utilita.standardizzaNomi(campoTesto.getText()));
                     st.setString(2,valoreCampo);
                     st.executeUpdate();
+                    valoreCampo=campoTesto.getText();
                     parent.aggiornaElementi();
                 } catch (SQLException ex) {
                     Logger.getLogger(ElementoScheda.class.getName()).log(Level.SEVERE, null, ex);
