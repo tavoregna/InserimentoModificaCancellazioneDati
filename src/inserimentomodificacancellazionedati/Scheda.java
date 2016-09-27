@@ -22,6 +22,7 @@ public class Scheda extends javax.swing.JFrame {
         
         aggiornaElementi();
         jLabel1.setText("GESTIONE "+tabella.toUpperCase());
+        jButton1.setText("AGGIUNGI "+tabella.toUpperCase());
         this.setVisible(true);
     }
 
