@@ -1,5 +1,7 @@
 package inserimentomodificacancellazionedati;
 
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +14,8 @@ public class Scheda extends javax.swing.JFrame {
     private MenuPrincipale parent;
     private String tabella;
     private String nomeCampo;
+    private int w=681;
+    private int h=355;
     
     public Scheda(MenuPrincipale p,String tabella,String nomeCampo) {
         initComponents();
@@ -19,8 +23,8 @@ public class Scheda extends javax.swing.JFrame {
         this.tabella=tabella;
         this.nomeCampo=nomeCampo;
         
-        pannello.setLayout(new BoxLayout(pannello, BoxLayout.Y_AXIS));
-        
+        //pannello.setLayout(new BoxLayout(pannello, BoxLayout.Y_AXIS));
+        pannello.setLayout(new GridLayout(0,1));
         aggiornaElementi();
         jLabel1.setText("GESTIONE "+tabella.toUpperCase());
         jButton1.setText("AGGIUNGI "+tabella.toUpperCase());
@@ -45,8 +49,11 @@ public class Scheda extends javax.swing.JFrame {
         pannello.removeAll();
         try {
             ResultSet rs=GestioneDatabase.querySelect("SELECT "+nomeCampo+" FROM "+tabella);
+            int i=0;
             while(rs!=null && rs.next())
             {
+                i++;
+                aumentaPannello(i);
                 pannello.add(new ElementoScheda(this, rs.getString(1)));
             }    
             } catch (SQLException ex) {
@@ -56,6 +63,13 @@ public class Scheda extends javax.swing.JFrame {
         
     }
 
+    public void aumentaPannello(int i)
+    {
+        pannello.setSize(w, h*(i/5));
+        pannello.setPreferredSize(new Dimension(w, h*(i/5)));
+        aggiornaUI();
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -91,13 +105,14 @@ public class Scheda extends javax.swing.JFrame {
         });
 
         jScrollPane1.setBackground(new java.awt.Color(153, 217, 234));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setAutoscrolls(true);
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(683, 421));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(681, 355));
 
         pannello.setBackground(new java.awt.Color(132, 210, 230));
         pannello.setToolTipText("");
         pannello.setAutoscrolls(true);
-        pannello.setPreferredSize(new java.awt.Dimension(681, 70));
+        pannello.setPreferredSize(new java.awt.Dimension(681, 355));
 
         javax.swing.GroupLayout pannelloLayout = new javax.swing.GroupLayout(pannello);
         pannello.setLayout(pannelloLayout);
@@ -107,10 +122,11 @@ public class Scheda extends javax.swing.JFrame {
         );
         pannelloLayout.setVerticalGroup(
             pannelloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 70, Short.MAX_VALUE)
+            .addGap(0, 355, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(pannello);
+        pannello.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,14 +136,12 @@ public class Scheda extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 696, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(73, 73, 73))))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(45, 45, 45))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,8 +153,8 @@ public class Scheda extends javax.swing.JFrame {
                     .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
