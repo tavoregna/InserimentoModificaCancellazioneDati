@@ -5,11 +5,13 @@
  */
 package inserimentomodificacancellazionedati;
 
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 /**
  *
@@ -41,6 +43,7 @@ public class ElementoScheda extends javax.swing.JPanel {
         setBackground(new java.awt.Color(132, 210, 230));
         setPreferredSize(new java.awt.Dimension(681, 70));
 
+        campoTesto.setDisabledTextColor(java.awt.Color.black);
         campoTesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoTestoActionPerformed(evt);

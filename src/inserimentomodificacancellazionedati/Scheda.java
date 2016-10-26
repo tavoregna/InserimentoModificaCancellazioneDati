@@ -1,5 +1,6 @@
 package inserimentomodificacancellazionedati;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
+import javax.swing.UIManager;
 
 public class Scheda extends javax.swing.JFrame {
 
