@@ -27,6 +27,7 @@ public class MenuPrincipale extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menù Principale");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(153, 217, 234));
 
