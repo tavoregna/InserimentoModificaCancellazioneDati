@@ -26,9 +26,14 @@ public class MenuPrincipale extends javax.swing.JFrame {
         modEsord = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Menù Principale");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(153, 217, 234));
 
@@ -137,7 +142,8 @@ public class MenuPrincipale extends javax.swing.JFrame {
     }//GEN-LAST:event_terapieActionPerformed
 
     private void mediciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mediciActionPerformed
-        apriScheda("Medico","Cognome");
+        this.setVisible(false);
+        new Medici(this);
     }//GEN-LAST:event_mediciActionPerformed
 
     private void modEsordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modEsordActionPerformed
@@ -148,6 +154,10 @@ public class MenuPrincipale extends javax.swing.JFrame {
         this.setVisible(false);
         new Esami(this);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Utilita.durata();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton diagnosi1;

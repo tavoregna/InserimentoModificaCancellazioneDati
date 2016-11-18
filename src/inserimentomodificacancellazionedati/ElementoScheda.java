@@ -1,27 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inserimentomodificacancellazionedati;
 
-import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 
-/**
- *
- * @author Riccardo
- */
 public class ElementoScheda extends javax.swing.JPanel {
 
     private Scheda parent;
     private String valoreCampo;
-    //private String vecchioValore;
     
     public ElementoScheda(Scheda p,String valore) {
         initComponents();
@@ -44,11 +32,6 @@ public class ElementoScheda extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(681, 70));
 
         campoTesto.setDisabledTextColor(java.awt.Color.black);
-        campoTesto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoTestoActionPerformed(evt);
-            }
-        });
 
         modifica.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         modifica.setText("Abilita Modifica");
@@ -94,10 +77,6 @@ public class ElementoScheda extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoTestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTestoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_campoTestoActionPerformed
-
     private void modificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificaActionPerformed
         // TODO add your handling code here:
         if((modifica.getText().equals("Abilita Modifica")))
@@ -120,7 +99,9 @@ public class ElementoScheda extends javax.swing.JPanel {
                     valoreCampo=campoTesto.getText();
                     parent.aggiornaElementi();
                 } catch (SQLException ex) {
-                    Logger.getLogger(ElementoScheda.class.getName()).log(Level.SEVERE, null, ex);
+                    Utilita.mostraMessaggio("Operazione non riuscita");
+                    Utilita.errore(ex);Logger.getLogger(ElementoScheda.class.getName()).log(Level.SEVERE, null, ex);
+                    campoTesto.setText(valoreCampo);
                 }
             }
             else

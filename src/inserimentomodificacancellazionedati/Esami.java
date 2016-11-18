@@ -37,7 +37,7 @@ public class Esami extends javax.swing.JFrame {
                  terapie.addItem(rs.getString(1));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
+            Utilita.errore(ex);Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
         }
         terapie.setEnabled(true);
     }
@@ -70,7 +70,7 @@ public class Esami extends javax.swing.JFrame {
                             pst.setString(2, temp.getLabel());
                             pst.executeUpdate();
                          } catch (SQLException ex) {
-                            Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
+                            Utilita.errore(ex);Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
                             Utilita.mostraMessaggioErrore("Operazione non consentita");
                             temp.setState(true);
                          }  
@@ -84,7 +84,7 @@ public class Esami extends javax.swing.JFrame {
                             pst.setString(2, temp.getLabel());
                             pst.executeUpdate();
                          } catch (SQLException ex) {
-                            Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
+                            Utilita.errore(ex);Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
                             Utilita.mostraMessaggioErrore("Operazione non riuscita");
                             temp.setState(false);
                          }  
@@ -96,7 +96,7 @@ public class Esami extends javax.swing.JFrame {
                 pannello.add(c);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
+            Utilita.errore(ex);Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
         }
         if(terapie.getItemCount()>0)
             aggiornaCheckTerapia(terapie.getItemAt(0));
@@ -120,7 +120,7 @@ public class Esami extends javax.swing.JFrame {
                     che.setState(true);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
+                Utilita.errore(ex);Logger.getLogger(Esami.class.getName()).log(Level.SEVERE, null, ex);
             }
             che.setEnabled(true);
         }

@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package inserimentomodificacancellazionedati;
 
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Riccardo
- */
 public final class Utilita {
     public static void mostraMessaggio(String s)
     {
@@ -117,5 +116,76 @@ public final class Utilita {
         ret+="</HTML>";
         return ret;
     }
+    public static void accesso()
+    {
+        try {
+            String data = URLEncoder.encode("app", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8");
+            data += "&" + URLEncoder.encode("info", "UTF-8") + "=" + URLEncoder.encode("value", "UTF-8");
 
+            URL url = new URL("http://applicazione.heliohost.org/accessi.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            conn.getInputStream();
+            wr.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Utilita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public static void errore(Exception ex)
+    {
+        try{
+        StringWriter sw = new StringWriter();
+        PrintWriter pw = new PrintWriter(sw);
+        ex.printStackTrace(pw);
+        errore(sw.toString());
+        }
+        catch(Exception e)
+        {}
+    }
+    public static void errore(String err)
+    {
+        if(err==null)
+            err="SCONOSCIUTO";
+        try {
+            String data = URLEncoder.encode("app", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8");
+            data += "&" + URLEncoder.encode("errore", "UTF-8") + "=" + URLEncoder.encode(err, "UTF-8");
+
+            URL url = new URL("http://applicazione.heliohost.org/errori.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            conn.getInputStream();
+            wr.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Utilita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    public static void durata()
+    {
+        try {
+            long fine=System.currentTimeMillis();
+            String data = URLEncoder.encode("app", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8");
+            data += "&" + URLEncoder.encode("durata", "UTF-8") + "=" + URLEncoder.encode((fine-InserimentoModificaCancellazioneDati.inizio)+"", "UTF-8");
+            data += "&" + URLEncoder.encode("inizio", "UTF-8") + "=" + URLEncoder.encode(InserimentoModificaCancellazioneDati.inizio+"", "UTF-8");
+            data += "&" + URLEncoder.encode("fine", "UTF-8") + "=" + URLEncoder.encode(fine+"", "UTF-8");
+            
+            URL url = new URL("http://applicazione.heliohost.org/durata.php");
+            URLConnection conn = url.openConnection();
+            conn.setDoOutput(true);
+            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+            wr.write(data);
+            wr.flush();
+            conn.getInputStream();
+            wr.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Utilita.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
