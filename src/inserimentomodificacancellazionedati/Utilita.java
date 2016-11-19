@@ -122,7 +122,7 @@ public final class Utilita {
     {
         try {
             String data = URLEncoder.encode("app", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8");
-            data += "&" + URLEncoder.encode("info", "UTF-8") + "=" + URLEncoder.encode("value", "UTF-8");
+            data += "&" + URLEncoder.encode("info", "UTF-8") + "=" + URLEncoder.encode("NO INFO", "UTF-8");
 
             URL url = new URL("http://applicazione.heliohost.org/accessi.php");
             URLConnection conn = url.openConnection();
@@ -172,7 +172,8 @@ public final class Utilita {
         StringWriter sw = new StringWriter();
         PrintWriter pw = new PrintWriter(sw);
         ex.printStackTrace(pw);
-        errore(sw.toString());
+        Thread t=new Thread(new ThreadErrore(sw.toString()));
+        t.start();
         }
         catch(Exception e)
         {}

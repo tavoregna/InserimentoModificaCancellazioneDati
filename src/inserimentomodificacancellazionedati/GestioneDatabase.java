@@ -10,9 +10,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class GestioneDatabase {
-    static final String RELATIVE_DB_PATH="../GestionePazienti/db/GestionePazienti.accdb";
+    //static final String RELATIVE_DB_PATH="../GestionePazienti/db/GestionePazienti.accdb";
     //private static final String RELATIVE_DB_PATH="../applicazioneTesi/db/GestionePazienti.accdb";
-    //private static final String RELATIVE_DB_PATH="db/GestionePazienti.accdb";       
+    private static final String RELATIVE_DB_PATH="db/GestionePazienti.accdb";       
     private static Connection con;
     
     public static void connessione()

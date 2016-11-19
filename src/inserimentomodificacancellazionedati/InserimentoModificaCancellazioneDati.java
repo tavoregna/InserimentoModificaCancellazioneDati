@@ -6,7 +6,10 @@ public class InserimentoModificaCancellazioneDati {
         Utilita.attivo();
         inizio=System.currentTimeMillis();
         Utilita.accesso();
+        
         GestioneDatabase.connessione();
+        Thread t=new Thread(new ThreadAvvio());
+        t.start();
         new MenuPrincipale();
     }
     
