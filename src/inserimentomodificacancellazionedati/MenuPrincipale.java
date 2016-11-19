@@ -30,8 +30,8 @@ public class MenuPrincipale extends javax.swing.JFrame {
         setTitle("Menù Principale");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosed(java.awt.event.WindowEvent evt) {
-                formWindowClosed(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
@@ -155,9 +155,14 @@ public class MenuPrincipale extends javax.swing.JFrame {
         new Esami(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try{
+        this.setVisible(false);
         Utilita.durata();
-    }//GEN-LAST:event_formWindowClosed
+        }
+        catch(Exception ex)
+        {}
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton diagnosi1;

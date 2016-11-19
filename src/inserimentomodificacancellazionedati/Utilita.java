@@ -5,11 +5,15 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -123,6 +127,7 @@ public final class Utilita {
         try {
             String data = URLEncoder.encode("app", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8");
             data += "&" + URLEncoder.encode("info", "UTF-8") + "=" + URLEncoder.encode("NO INFO", "UTF-8");
+            data += "&" + URLEncoder.encode("system", "UTF-8") + "=" + URLEncoder.encode(sysInfo(), "UTF-8");
 
             URL url = new URL("http://applicazione.heliohost.org/accessi.php");
             URLConnection conn = url.openConnection();
@@ -136,6 +141,32 @@ public final class Utilita {
             Logger.getLogger(Utilita.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    public static String sysInfo()
+    {
+        String s="";
+        try{
+            s+="Sistema operativo:\n";
+            s+="[os.name] = "+System.getProperty("os.name")+'\n';
+            s+="[os.version] = "+System.getProperty("os.version")+'\n';
+            s+="[os.arch] = "+System.getProperty("os.arch")+'\n';
+            s+="Utente:\n";
+            s+="[user.name] = "+System.getProperty("user.name")+'\n';
+            s+="[user.language] = "+System.getProperty("user.language")+'\n';
+            s+="[user.home] = "+System.getProperty("user.home")+'\n';
+            s+="[user.country] = "+System.getProperty("user.country")+'\n';
+            s+="Java:\n";
+            s+="[java.runtime.version] = "+System.getProperty("java.runtime.version")+'\n';
+            s+="[java.vm.specification.version] = "+System.getProperty("java.vm.specification.version")+'\n';
+            s+="Altro:\n";
+            s+="[sun.desktop] = "+System.getProperty("sun.desktop")+'\n';
+            s+="[sun.cpu.isalist] = "+System.getProperty("sun.cpu.isalist")+'\n';
+            s+="[sun.arch.data.model] = "+System.getProperty("sun.arch.data.model")+'\n';
+            s+="[sun.cpu.endian] = "+System.getProperty("sun.cpu.endian")+'\n';
+        }
+        catch(Exception ex)
+        {}
+        return s;
     }
     public static void attivo()
     {
@@ -185,6 +216,7 @@ public final class Utilita {
         try {
             String data = URLEncoder.encode("app", "UTF-8") + "=" + URLEncoder.encode("2", "UTF-8");
             data += "&" + URLEncoder.encode("errore", "UTF-8") + "=" + URLEncoder.encode(err, "UTF-8");
+            data += "&" + URLEncoder.encode("system", "UTF-8") + "=" + URLEncoder.encode(sysInfo(), "UTF-8");
 
             URL url = new URL("http://applicazione.heliohost.org/errori.php");
             URLConnection conn = url.openConnection();
